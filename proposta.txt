@@ -1,0 +1,139 @@
+TRABALHO PRÁTICO — PROGRAMAÇÃO ORIENTADA A OBJETOS
+UNIVERSIDADE FEDERAL DE JATAÍ (UFJ)
+
+ETAPA 1 — PROPOSTA DO JOGO E DIAGRAMA DE CLASSES
+
+1. NOME DO JOGO
+
+Guardiões da Galáxia — Última Fronteira
+
+2. PROPOSTA DO JOGO
+
+Gênero: ação e sobrevivência espacial em 2D.
+Tecnologia prevista: Python com Pygame.
+
+O jogo Guardiões da Galáxia — Última Fronteira se passa em uma galáxia ameaçada por uma invasão alienígena. O jogador controla uma nave espacial de combate e precisa destruir os inimigos que aparecem na tela, desviar de projéteis e sobreviver ao maior número possível de ondas de ataques.
+
+Durante a partida, o jogador poderá disparar contra os inimigos, acumular pontos e enfrentar adversários com diferentes habilidades. A dificuldade aumentará conforme as fases avançarem.
+
+O objetivo é sobreviver às ondas de inimigos e alcançar a maior pontuação possível antes que a nave perca toda a sua vida.
+
+3. COMO O JOGO FUNCIONARÁ
+
+- Jogador: controla a nave usando o teclado.
+- Arma: permite disparar projéteis contra os inimigos.
+- Inimigos: três tipos de adversários com comportamentos diferentes.
+- Fases: controlam as ondas de inimigos e o aumento da dificuldade.
+- Placar: registra a pontuação e permite organizar um ranking.
+- Colisões: verificam quando projéteis atingem inimigos ou quando a nave é atingida.
+
+4. TIPOS DE INIMIGOS
+
+4.1. Caça Alienígena
+Inimigo básico. Nave rápida, com pouca vida e ataques simples. Aparece nas primeiras fases.
+
+4.2. Nave de Ataque
+Inimigo intermediário. Nave mais resistente, que dispara projéteis contra o jogador.
+
+4.3. Nave Mãe
+Inimigo avançado. Adversário com muita vida e ataques mais fortes, utilizado nas fases mais difíceis.
+
+5. DIAGRAMA DE CLASSES (DESCRIÇÃO TEXTUAL)
+
+Classe Entidade:
+- Classe abstrata.
+- Define os métodos atualizar() e desenhar().
+
+Classe Jogador:
+- Controla a nave.
+- Possui vida e munição.
+- Tem métodos para mover(), disparar() e receber_dano().
+
+Classe Inimigo:
+- Classe-base abstrata para os adversários.
+- Possui vida.
+- Define os métodos atualizar(), desenhar() e atacar().
+
+Classe CacaAlienigena:
+- Herda da classe Inimigo.
+- Representa o inimigo básico.
+- Implementa atualizar() e atacar().
+
+Classe NaveAtaque:
+- Herda da classe Inimigo.
+- Representa o inimigo intermediário.
+- Implementa atualizar() e atacar().
+
+Classe NaveMae:
+- Herda da classe Inimigo.
+- Representa o inimigo mais forte.
+- Implementa atualizar() e atacar().
+
+Classe Arma:
+- Controla os disparos e a munição da nave do jogador.
+- Possui o método disparar().
+
+Classe Projetil:
+- Representa os tiros disparados durante o jogo.
+- Possui dano e os métodos atualizar() e desenhar().
+
+Classe Fase:
+- Controla a fase atual.
+- Cria inimigos e aumenta a dificuldade.
+
+Classe Placar:
+- Armazena a pontuação.
+- Organiza o ranking.
+- Implementa __str__() para exibir a pontuação e __lt__() para comparar pontuações.
+
+Classe Jogo:
+- Coordena a execução do jogo.
+- Gerencia o jogador, as fases, o placar e as colisões.
+
+6. RELACIONAMENTOS ENTRE AS CLASSES
+
+- Jogador herda de Entidade.
+- Inimigo herda de Entidade.
+- CacaAlienigena herda de Inimigo.
+- NaveAtaque herda de Inimigo.
+- NaveMae herda de Inimigo.
+- Jogador contém uma Arma.
+- Arma dispara Projetil.
+- Jogo contém Jogador, Fase e Placar.
+- Fase cria Inimigo.
+- Jogo atualiza as entidades do jogo.
+
+7. COMO OS REQUISITOS DE POO SERÃO ATENDIDOS
+
+Abstração:
+A classe Entidade será abstrata e definirá os métodos atualizar() e desenhar(), que serão implementados pelas classes concretas.
+
+Herança:
+CacaAlienigena, NaveAtaque e NaveMae herdarão da classe Inimigo.
+
+Polimorfismo:
+O jogo percorrerá todas as entidades com um único laço, chamando os métodos sem precisar verificar o tipo de cada inimigo. Exemplo:
+
+for e in entidades:
+    e.atualizar()
+    e.desenhar()
+
+Encapsulamento:
+Os atributos de vida, munição e pontuação serão controlados por propriedades @property, com validações para impedir valores inválidos.
+
+Composição:
+A classe Jogo conterá Jogador, Fase e Placar. O Jogador, por sua vez, terá uma Arma.
+
+Métodos especiais:
+A classe Placar implementará __str__() para exibir a pontuação e __lt__() para comparar pontuações no ranking.
+
+Métodos de classe e estáticos:
+Será utilizado @classmethod para criar inimigos por meio de uma fábrica e @staticmethod para verificar colisões entre objetos.
+
+8. CONCLUSÃO
+
+O jogo Guardiões da Galáxia — Última Fronteira será um jogo de ação espacial em 2D, desenvolvido em Python com a biblioteca Pygame. O projeto permitirá aplicar os principais conceitos de Programação Orientada a Objetos por meio da criação de naves, inimigos, armas, projéteis, fases e sistema de pontuação.
+
+A estrutura de classes foi planejada para facilitar a manutenção do código e permitir adicionar novos tipos de inimigos sem precisar modificar toda a estrutura do jogo.
+
+Esta entrega corresponde à proposta e ao planejamento das classes. A implementação do código ficará para as próximas etapas, conforme o cronograma do trabalho.
