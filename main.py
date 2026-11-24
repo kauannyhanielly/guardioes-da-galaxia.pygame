@@ -25,19 +25,19 @@ def carregar_imagem(nome, largura, altura, cor_reserva):
         return img
 
 
-# Imagens (ajuste o tamanho se ficar esquisito)
+
 jogador_img = carregar_imagem("jogador.png", 66, 50, (60, 140, 255))
 inimigo_img = carregar_imagem("inimigo.png", 70, 60, (220, 50, 50))
 
-# Jogador: começa embaixo, no meio da tela
+
 jogador = jogador_img.get_rect(midbottom=(LARGURA // 2, ALTURA - 20))
 velocidade_jogador = 5
 
-# Inimigo: anda de um lado para o outro
+
 inimigo = inimigo_img.get_rect(topleft=(100, 80))
 velocidade_inimigo = 3
 
-# Estrelas do fundo: [x, y, velocidade]
+
 estrelas = []
 for _ in range(80):
     estrelas.append([random.randint(0, LARGURA),
@@ -50,7 +50,7 @@ while rodando:
         if evento.type == pygame.QUIT:
             rodando = False
 
-    # Movimento do jogador (setas ou W, A, S, D)
+
     teclas = pygame.key.get_pressed()
     if teclas[pygame.K_LEFT] or teclas[pygame.K_a]:
         jogador.x -= velocidade_jogador
@@ -61,22 +61,22 @@ while rodando:
     if teclas[pygame.K_DOWN] or teclas[pygame.K_s]:
         jogador.y += velocidade_jogador
 
-    # Impede o jogador de sair da tela
+ 
     jogador.clamp_ip(tela.get_rect())
 
-    # Movimento do inimigo: vai e volta na horizontal
+
     inimigo.x += velocidade_inimigo
     if inimigo.right >= LARGURA or inimigo.left <= 0:
         velocidade_inimigo = -velocidade_inimigo
 
-    # Movimento das estrelas: descem e voltam para o topo
+
     for estrela in estrelas:
         estrela[1] += estrela[2]
         if estrela[1] > ALTURA:
             estrela[1] = 0
             estrela[0] = random.randint(0, LARGURA)
 
-    # Desenho
+
     tela.fill((5, 5, 25))
     for x, y, vel in estrelas:
         brilho = 120 + vel * 45

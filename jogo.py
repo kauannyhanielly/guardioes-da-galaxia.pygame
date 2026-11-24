@@ -5,8 +5,7 @@ from inimigo import Inimigo
 from projetil import Projetil
 from fase import Fase
 from placar import Placar
-import tipos_inimigos  # garante que os tipos de inimigo se cadastrem na fábrica
-
+import tipos_inimigos  
 
 class Jogo:
     LARGURA = 800
@@ -31,15 +30,15 @@ class Jogo:
         self.reiniciar()
 
     def reiniciar(self):
-        # Composição: o Jogo TEM um Jogador, uma Fase e um Placar
+       
         self.jogador = Jogador(self.LARGURA // 2 - 33, self.ALTURA - 80)
         self.placar = Placar()
         self.fase = Fase(1)
-        self.estado = "jogando"  # "jogando", "venceu" ou "perdeu"
+        self.estado = "jogando" 
         self.iniciar_fase()
 
     def iniciar_fase(self):
-        # Lista única com tudo que é Entidade (nave, inimigos e tiros)
+       
         self.entidades = [self.jogador] + self.fase.criar_inimigos()
 
     @staticmethod
@@ -76,11 +75,11 @@ class Jogo:
                 inimigo.ativo = False
 
     def atualizar(self):
-        # POLIMORFISMO: um único laço, sem "if" por tipo
+        
         for e in self.entidades:
             e.atualizar()
 
-        # Inimigos tentam atacar (cada tipo ataca do seu jeito)
+   
         for inimigo in self.inimigos():
             self.adicionar_tiro(inimigo.atacar())
 
@@ -89,7 +88,7 @@ class Jogo:
         if not self.jogador.ativo:
             self.estado = "perdeu"
 
-        # Remove o que "morreu" (menos o jogador)
+       
         self.entidades = [e for e in self.entidades
                           if e.ativo or e is self.jogador]
 

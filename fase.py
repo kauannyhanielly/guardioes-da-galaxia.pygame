@@ -2,7 +2,7 @@ from inimigo import Inimigo
 
 
 class Fase:
-    # Cada linha guarda o tipo, a altura e as posições horizontais.
+    
     _FORMACOES = {
         1: (
             ("caca", 100, (80, 200, 320, 440, 560, 680)),

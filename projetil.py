@@ -13,20 +13,11 @@ class Projetil(Entidade):
         self.ativo = True
 
     def atualizar(self):
-        self.y += self.velocidade_y
-
-        if self.y < 0 or self.y > 600:
+        self.rect.y += self.velocidade_y
+        if self.rect.bottom < 0 or self.rect.top > 600:
             self.ativo = False
 
     def desenhar(self, tela):
         if self.ativo:
-            if self.do_jogador:
-                cor = (0, 255, 0)
-            else:
-                cor = (255, 0, 0)
-
-            pygame.draw.rect(
-                tela,
-                cor,
-                (self.x, self.y, self.largura, self.altura)
-            )
+            cor = (0, 255, 0) if self.do_jogador else (255, 0, 0)
+            pygame.draw.rect(tela, cor, self.rect)
