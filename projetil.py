@@ -19,5 +19,6 @@ class Projetil(Entidade):
 
     def desenhar(self, tela):
         if self.ativo:
-            cor = (0, 255, 0) if self.do_jogador else (255, 0, 0)
-            pygame.draw.rect(tela, cor, self.rect)
+            cor = (80, 255, 120) if self.do_jogador else (255, 70, 70)
+            pygame.draw.rect(tela, cor, self.rect, border_radius=3)
+            pygame.draw.rect(tela, (255, 255, 255), self.rect.inflate(-4, -6), border_radius=2)

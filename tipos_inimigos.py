@@ -1,14 +1,16 @@
 import pygame
 
 from inimigo import Inimigo
+from recursos import Recursos
 
 
 class CacaAlienigena(Inimigo):
     tipo = "caca"
 
     def __init__(self, x, y):
-        super().__init__(x, y, 32, 20, 1, 3, 10)
+        super().__init__(x, y, 34, 54, 1, 3, 10)
         self.direcao = 1
+        self.imagem = Recursos.imagem("alien.png", 42, 66, (80, 220, 100))
 
     def atualizar(self):
         self.rect.x += self.velocidade * self.direcao
@@ -20,7 +22,7 @@ class CacaAlienigena(Inimigo):
             self.direcao = 1
 
     def desenhar(self, tela):
-        pygame.draw.rect(tela, (80, 220, 100), self.rect)
+        self.desenhar_imagem(tela)
 
     def atacar(self):
         return None
@@ -30,8 +32,9 @@ class NaveAtaque(Inimigo):
     tipo = "ataque"
 
     def __init__(self, x, y):
-        super().__init__(x, y, 44, 26, 3, 2, 25)
+        super().__init__(x, y, 56, 56, 3, 2, 25)
         self.direcao = 1
+        self.imagem = Recursos.imagem("nave_ataque.png", 66, 66, (240, 100, 70))
         self.limite_esquerdo = max(0, x - 80)
         self.limite_direito = min(800, self.rect.right + 80)
         self.ultimo_tiro = pygame.time.get_ticks()
@@ -46,7 +49,7 @@ class NaveAtaque(Inimigo):
             self.direcao = 1
 
     def desenhar(self, tela):
-        pygame.draw.rect(tela, (240, 100, 70), self.rect)
+        self.desenhar_imagem(tela)
 
     def atacar(self):
         agora = pygame.time.get_ticks()
@@ -63,12 +66,13 @@ class NaveMae(Inimigo):
     tipo = "mae"
 
     def __init__(self, x, y):
-        super().__init__(x, y, 100, 40, 20, 1, 100)
+        super().__init__(x, y, 104, 100, 20, 1, 100)
         self.direcao = 1
+        self.imagem = Recursos.imagem("nave_mae.png", 120, 118, (165, 95, 240))
         self.ultimo_tiro = pygame.time.get_ticks()
 
     def atualizar(self):
-        if self.rect.y < 100:
+        if self.rect.y < 50:
             self.rect.y += self.velocidade
 
         self.rect.x += self.velocidade * self.direcao
@@ -80,7 +84,7 @@ class NaveMae(Inimigo):
             self.direcao = 1
 
     def desenhar(self, tela):
-        pygame.draw.rect(tela, (165, 95, 240), self.rect)
+        self.desenhar_imagem(tela)
 
     def atacar(self):
         agora = pygame.time.get_ticks()

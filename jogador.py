@@ -1,6 +1,7 @@
 import pygame
 from entidade import Entidade
 from arma import Arma
+from recursos import Recursos
 
 
 class Jogador(Entidade):
@@ -9,10 +10,11 @@ class Jogador(Entidade):
     ALTURA_TELA = 600
 
     def __init__(self, x, y):
-        super().__init__(x, y, 66, 50)
+        super().__init__(x, y, 56, 56)
         self.vida = self.VIDA_MAXIMA
         self.velocidade = 5
         self.arma = Arma()
+        self.imagem = Recursos.imagem("jogador.png", 84, 84, (60, 140, 255))
 
     @property
     def vida(self):
@@ -46,4 +48,5 @@ class Jogador(Entidade):
         self.rect.clamp_ip(limites)
 
     def desenhar(self, tela):
-        pygame.draw.rect(tela, (60, 140, 255), self.rect)
+        if self.ativo:
+            self.desenhar_imagem(tela)
